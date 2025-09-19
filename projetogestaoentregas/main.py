@@ -1,10 +1,13 @@
 import os
 import time
+import json
+from utils import pegarinformacoes
 def saindo():
     for i in range(0, 3):
         print(".",end="", flush=True)
         time.sleep(0.4)
 def menu():
+    
     while True:
         #limpar o terminal
         os.system("cls")
@@ -39,4 +42,8 @@ def menu():
             input("Opção inválida. Pressione enter para continuar")
 
 if __name__ == "__main__":
-    menu()
+    pegarinformacoes("motorista")
+    pegarinformacoes("entrega")
+    pegarinformacoes("veiculo")
+    
+    #menu()
