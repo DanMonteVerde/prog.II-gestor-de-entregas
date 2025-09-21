@@ -1,6 +1,6 @@
 class Motorista():
     idcont = 1
-    def __init__(self, id, nome, cnh):
+    def __init__(self, nome, cnh):
         self.id = Motorista.idcont
         Motorista.idcont +=1
         self.nome = nome

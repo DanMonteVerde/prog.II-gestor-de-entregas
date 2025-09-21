@@ -1,7 +1,7 @@
 import os
 import time
 import json
-from utils import pegarinformacoes
+from utils import pegarinformacoes, mandarinformacoes
 def saindo():
     for i in range(0, 3):
         print(".",end="", flush=True)
