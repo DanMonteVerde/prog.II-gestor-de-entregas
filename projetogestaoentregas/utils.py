@@ -7,7 +7,7 @@ def pegarid(arquivo):
         return 0
     l = []
     for j,k in dados.items(): 
-        l.append(j)
+        l.append(int(j))
     return max(l)
 
 #pegarinformacoes("entrega")

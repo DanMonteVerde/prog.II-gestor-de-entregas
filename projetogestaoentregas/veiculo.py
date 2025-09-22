@@ -75,16 +75,20 @@ class Veiculo():
 
         while True:
             placa = input("Placa do veículo: ").upper()
-
-
             if Veiculo.validando(placa):
+                veiculos = pegarinformacoes("veiculo")
+                if not veiculos:
+                    veiculos = {}
+
                 novoid = pegarid("veiculo") + 1
                 v = Veiculo(placa, modelo)
                 v.id = novoid
 
-                veiculos.append({"id":v.id, "modelo":v.modelo, "placa": v.placa})
+                veiculos[str(v.id)] = {"modelo": v.modelo, "placa": v.placa}
                 salvarinformacoes("veiculo", veiculos)
+
                 print("==== VEÍCULO CADASTRADO COM SUCESSO ====")
                 break
             else:
                 print("[ERRO] Placa inválida!")
+
