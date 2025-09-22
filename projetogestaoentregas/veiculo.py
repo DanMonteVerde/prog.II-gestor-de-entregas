@@ -8,6 +8,7 @@ def checar_placa(placa):
             return "existe"
     else:
         return True
+    
 class Veiculo():
     idcont = 1
     def __init__(self, placa, modelo):

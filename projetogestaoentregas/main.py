@@ -24,7 +24,7 @@ def menu():
         opcao = input().lstrip()
 
         if opcao == "1":
-            cadastrar_motorista()
+            Motorista.cadastrar()
         elif opcao == "2":
             if Veiculo.criar_veiculo() == False: 
                 print("Cadastro cancelado", end = "")
@@ -47,22 +47,6 @@ def menu():
         else:
             input("Opção inválida. Pressione enter para continuar")
 
-motoristas = pegarinformacoes("motorista")
-def cadastrar_motorista():
-    
-    nome = input("Nome do motorista: ")
-
-    while True:
-        cnh = input("CNH (11 Digitos): ")
-        if Motorista.valida_cnh(cnh):
-            
-            m = Motorista(nome, cnh)
-            motoristas.append({"id": m.id, "nome": m.nome, "cnh":m.cnh})
-            salvarinformacoes("motorista",motoristas)
-            print("====MOTORISTA CADASTRADO COM SUCESSO====")
-            break
-        else:
-            print("[ERRO] CNH INVÁLIDA!")
 
 if __name__ == "__main__":
     menu()

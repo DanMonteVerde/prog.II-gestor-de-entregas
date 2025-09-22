@@ -1,4 +1,4 @@
-
+from utils import pegarinformacoes, salvarinformacoes, pegarid
 class Motorista():
     idcont = 1
 
@@ -14,6 +14,30 @@ class Motorista():
     @staticmethod
     def valida_cnh(cnh):
         return cnh.isdigit() and len(cnh) == 11
+    
+
+    @staticmethod
+    
+    def cadastrar():
+        
+        motoristas = pegarinformacoes("motorista")
+
+        nome = input("Nome do motorista: ")
+
+        while True:
+            cnh = input("CNH (11 dígitos): ")
+            if Motorista.valida_cnh(cnh):
+                novo_id = pegarid("motorista") + 1
+                m = Motorista(nome, cnh)
+                m.id = novo_id
+
+                motoristas.append({"id": m.id, "nome": m.nome, "cnh": m.cnh})
+                salvarinformacoes("motorista", motoristas)
+
+                print("====MOTORISTA CADASTRADO COM SUCESSO====")
+                break
+            else:
+                print("[ERRO] CNH INVÁLIDA!")
 
 
 if __name__ == "__main__":
