@@ -1,7 +1,9 @@
 import os
 import time
 import json
-from utils import pegarinformacoes, mandarinformacoes
+from utils import pegarinformacoes, salvarinformacoes, pegarid
+from motoristas import Motorista
+from veiculo import Veiculo
 def saindo():
     for i in range(0, 3):
         print(".",end="", flush=True)
@@ -22,9 +24,13 @@ def menu():
         opcao = input().lstrip()
 
         if opcao == "1":
-            print("Cadastrar motorista")
+            cadastrar_motorista()
         elif opcao == "2":
-            print("Cadastrar veículo")
+            if Veiculo.criar_veiculo() == False: 
+                print("Cadastro cancelado", end = "")
+                saindo()
+            else:
+                input("Cadastro realizado com sucesso, pressione enter para continuar")
         elif opcao == "3":
             print("Registrar entrega")
         elif opcao == "4":
@@ -41,9 +47,22 @@ def menu():
         else:
             input("Opção inválida. Pressione enter para continuar")
 
-if __name__ == "__main__":
-    pegarinformacoes("motorista")
-    pegarinformacoes("entrega")
-    pegarinformacoes("veiculo")
+motoristas = pegarinformacoes("motorista")
+def cadastrar_motorista():
     
-    #menu()
+    nome = input("Nome do motorista: ")
+
+    while True:
+        cnh = input("CNH (11 Digitos): ")
+        if Motorista.valida_cnh(cnh):
+            
+            m = Motorista(nome, cnh)
+            motoristas.append({"id": m.id, "nome": m.nome, "cnh":m.cnh})
+            salvarinformacoes("motorista",motoristas)
+            print("====MOTORISTA CADASTRADO COM SUCESSO====")
+            break
+        else:
+            print("[ERRO] CNH INVÁLIDA!")
+
+if __name__ == "__main__":
+    menu()

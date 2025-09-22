@@ -1,6 +1,12 @@
-{
-    "motorista": "motorista",
-    "1": "teste",
-    "3": "teste",
-    "id": "conteudo"
-}
+[
+    {
+        "id": 1,
+        "nome": "wwew",
+        "cnh": "12345678910"
+    },
+    {
+        "id": 1,
+        "nome": "gabs",
+        "cnh": "12345678941"
+    }
+]

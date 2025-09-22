@@ -1,32 +1,38 @@
 import json
+import os
 #DEPOIS DE CRIAR OS METODOS DE PEGAR INFORMAÇÕES, FAZER ISSO PRA NAO TER ERRO DE ID, TENHO O EXEMPLLO NO CODIGO DA BIBLIOTECA VIRTUAL
-def pegarid(classe):
-    pass
+def pegarid(arquivo):
+    dados = pegarinformacoes(arquivo)
+    if not dados:
+        return 0
+    l = []
+    for j,k in dados.items(): 
+        l.append(j)
+    return max(l)
 
 #pegarinformacoes("entrega")
 #pega as informacoes do json entrega
 #e assim com os outros json
 #Talvez seja necessario fazser uma checagem pra ver se existe, porem nao vou fazer agr
 def pegarinformacoes(arquivo):
-    with open(f"{arquivo}.json", "r", encoding="utf-8") as f:
-        dados = json.load(f)
-    print(dados)
-    return dados
+    if os.path.exists(f"{arquivo}.json"):
+        with open(f"{arquivo}.json", "r", encoding="utf-8") as f:
+            return json.load(f)
+    return []
 
-di = {"id": "id", "conteudo": "conteudo"}
-def mandarinformacoes(arquivo, adicionar):
-    dados = pegarinformacoes(arquivo)
-    #informações, tem que ver como vai mandar dados
-    #nesse momento ele ta esperando adicionar como um dicionario com as chaves id e conteudo
-    a = adicionar["id"]
-    dados[str(a)] = adicionar["conteudo"]
+di = {"id": "2", "placa": "122231", "modelo": "modelo"}
+def salvarinformacoes(arquivo, dados):
+    # dados = pegarinformacoes(arquivo)
+    # if conteudo["id"] in dados.keys():
+    #     return False
+    # a = conteudo["id"]
+    # del conteudo["id"]
+    # dados[a] = conteudo
+    
     with open(f"{arquivo}.json", "w", encoding="utf-8") as f:
         json.dump(dados, f, indent=4)
-    print(dados)
+    # print(dados)
     return True
 #PARA TESTES
 if __name__ == "__main__":
-    pegarinformacoes("motorista")
-    pegarinformacoes("entrega")
-    pegarinformacoes("veiculo")
-    mandarinformacoes("motorista", di)
+    print(salvarinformacoes("entrega",di))

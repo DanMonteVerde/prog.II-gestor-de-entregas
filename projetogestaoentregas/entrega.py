@@ -1,7 +1,9 @@
+from utils import pegarid
 class Entrega():
     idcont = 1
-    def __init__(self, id, descricao, motorista, veiculo, status):
-        self.id = Entrega.idcont
+    def __init__(self, descricao, motorista, veiculo, status):
+        Entrega.idcont = int(pegarid("entrega"))
+        self.id = Entrega.idcont+1
         Entrega.idcont += 1
         self.descricao = descricao
         self.__motorista = motorista
@@ -18,3 +20,7 @@ class Entrega():
     @status.setter
     def status(self, status):
         self.__status = status    
+
+if __name__ == "__main__":
+    e = Entrega("","","","")
+    print(e)
