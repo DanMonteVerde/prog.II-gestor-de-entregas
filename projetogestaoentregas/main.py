@@ -26,11 +26,13 @@ def menu():
         if opcao == "1":
             Motorista.cadastrar()
         elif opcao == "2":
-            if Veiculo.criar_veiculo() == False: 
-                print("Cadastro cancelado", end = "")
-                saindo()
-            else:
-                input("Cadastro realizado com sucesso, pressione enter para continuar")
+            # if Veiculo.criar_veiculo() == False: 
+            #     print("Cadastro cancelado", end = "")
+            #     saindo()
+            # else:
+            #     input("Cadastro realizado com sucesso, pressione enter para continuar")
+
+            Veiculo.cadastrar()
         elif opcao == "3":
             print("Registrar entrega")
         elif opcao == "4":
