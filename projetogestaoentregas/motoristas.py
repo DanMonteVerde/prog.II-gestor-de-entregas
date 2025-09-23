@@ -1,7 +1,6 @@
 from utils import pegarinformacoes, salvarinformacoes, pegarid
 class Motorista():
     idcont = 1
-
     def __init__(self, nome:str, cnh:str):
         self.id = Motorista.idcont 
         Motorista.idcont +=1
@@ -31,7 +30,7 @@ class Motorista():
                 m = Motorista(nome, cnh)
                 m.id = novo_id
 
-                motoristas.append({"id": m.id, "nome": m.nome, "cnh": m.cnh})
+                motoristas[str(m.id)] = {"nome": m.nome, "cnh": m.cnh}
                 salvarinformacoes("motorista", motoristas)
 
                 print("====MOTORISTA CADASTRADO COM SUCESSO====")

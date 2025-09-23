@@ -1,6 +1,10 @@
 import json
 import os
-#DEPOIS DE CRIAR OS METODOS DE PEGAR INFORMAÇÕES, FAZER ISSO PRA NAO TER ERRO DE ID, TENHO O EXEMPLLO NO CODIGO DA BIBLIOTECA VIRTUAL
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Define o caminho para o JSON na mesma pasta
+caminho_arquivo = os.path.join(BASE_DIR, "entregas.json")
 def pegarid(arquivo):
     dados = pegarinformacoes(arquivo)
     if not dados:
@@ -10,26 +14,19 @@ def pegarid(arquivo):
         l.append(int(j))
     return max(l)
 
-#pegarinformacoes("entrega")
-#pega as informacoes do json entrega
-#e assim com os outros json
-#Talvez seja necessario fazser uma checagem pra ver se existe, porem nao vou fazer agr
 def pegarinformacoes(arquivo):
-    if os.path.exists(f"{arquivo}.json"):
-        with open(f"{arquivo}.json", "r", encoding="utf-8") as f:
+    caminho_arquivo = os.path.join(BASE_DIR, f"{arquivo}.json")
+    if os.path.exists(caminho_arquivo):
+        with open(caminho_arquivo, "r", encoding="utf-8") as f:
             return json.load(f)
-    return []
+    return {}
 
 di = {"id": "2", "placa": "122231", "modelo": "modelo"}
 def salvarinformacoes(arquivo, dados):
-    # dados = pegarinformacoes(arquivo)
-    # if conteudo["id"] in dados.keys():
-    #     return False
-    # a = conteudo["id"]
-    # del conteudo["id"]
-    # dados[a] = conteudo
+
+    caminho_arquivo = os.path.join(BASE_DIR, f"{arquivo}.json")
     
-    with open(f"{arquivo}.json", "w", encoding="utf-8") as f:
+    with open(caminho_arquivo, "w", encoding="utf-8") as f:
         json.dump(dados, f, indent=4)
     # print(dados)
     return True

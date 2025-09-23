@@ -4,12 +4,21 @@ import json
 from utils import pegarinformacoes, salvarinformacoes, pegarid
 from motoristas import Motorista
 from veiculo import Veiculo
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+def checararquivos():
+    arquivos = ["motorista", "veiculo", "entrega"]
+
+    for nome in arquivos:
+        caminho = os.path.join(BASE_DIR, f"{nome}.json")
+        if not os.path.exists(caminho):  # só cria se não existir
+            salvarinformacoes(nome, {})
 def saindo():
     for i in range(0, 3):
         print(".",end="", flush=True)
         time.sleep(0.4)
 def menu():
-    
+    checararquivos()
     while True:
         #limpar o terminal
         os.system("cls")
