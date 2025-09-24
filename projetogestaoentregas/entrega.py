@@ -1,4 +1,6 @@
-from utils import pegarid, pegarinformacoes
+from utils import pegarid, pegarinformacoes, salvarinformacoes
+from motoristas import Motorista
+from veiculo import Veiculo
 class Entrega():
     idcont = 1
     def __init__(self, descricao, motorista, veiculo, status):
@@ -11,7 +13,12 @@ class Entrega():
         self.__status = status
     def __str__(self):
         return f"{self.id} - {self.descricao} - {self.__motorista} - {self.__veiculo} - {self.__status}"
-
+    @property
+    def motorista(self):
+        return self.__motorista
+    @property
+    def veiculo(self):
+        return self.__veiculo
     @property
     def status(self):
         return self.__status
@@ -20,7 +27,17 @@ class Entrega():
     @status.setter
     def status(self, status):
         self.__status = status    
-
+    #python nao aceita chamar função em objetos de classes privados, ou seja, essa função é necessaria
+    def para_dicionario(self):
+        dic = {
+            str(self.id): {
+                "descricao": self.descricao,
+                "motorista": self.motorista.todict(),
+                "veiculo": self.veiculo.todict(),
+                "status": self.__status
+            }
+        }
+        return dic
     @staticmethod
     def registrar_entrega():
         descricao = input("Descricao: ")
@@ -47,6 +64,7 @@ class Entrega():
                     for i in range(len(motoristas)):
                         if motorista_escolhido == i+1:
                             motorista_escolhido = motoristas[str(i+1)]
+                            id_motorista_escolhido = str(i+1)
                             input(motorista_escolhido)
                             break
                     break
@@ -72,10 +90,17 @@ class Entrega():
                         for i in range(len(veiculos)):
                             if veiculo_escolhido == i+1:
                                 veiculo_escolhido = veiculos[str(i+1)]
+                                id_veiculo_escolhido = str(i+1)
                                 input(veiculo_escolhido)
                                 break
                         break
                 status = input("Status da entrega: ")
+                motorista = Motorista.toobj(motorista_escolhido)
+                veiculo = Veiculo.toobj(veiculo_escolhido)
+                motorista.id = id_motorista_escolhido
+                veiculo.id = id_veiculo_escolhido
+                entrega = Entrega(descricao, motorista, veiculo, status)
+                salvarinformacoes("entrega", entrega.para_dicionario())
                 #VER COMO VAI FUNCIONAR ESSA TRANSFERENCIA DE DADOS
             #JSON PRIMEIRO E DEPOIS CLASSE, OU AO CONTRARIO
                 print("====ENTREGA REGISTRADA COM SUCESSO====")

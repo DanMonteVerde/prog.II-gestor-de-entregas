@@ -10,6 +10,12 @@ class Veiculo():
     def __str__(self):
         return f"{self.id} - {self.modelo} - Placa: {self.placa}"
     
+    def todict(self):
+        return {f"{str(self.id)}":{"modelo": self.modelo, "placa": self.placa}}
+    
+    @staticmethod
+    def toobj(dicionario):
+        return Veiculo(dicionario["placa"], dicionario["modelo"])
     @staticmethod
     def validando(placa):
         antigo = r"^[A-Z]{3}[0-9]{4}$"

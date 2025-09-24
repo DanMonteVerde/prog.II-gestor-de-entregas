@@ -6,7 +6,11 @@ class Motorista():
         Motorista.idcont +=1
         self.nome = nome
         self.cnh = cnh
-
+    def todict(self):
+        return {f"{str(self.id)}":{"nome": self.nome, "cnh": self.cnh}}
+    @staticmethod
+    def toobj(dicionario):
+        return Motorista(dicionario["nome"], dicionario["cnh"])
     def __str__(self):
         return f"{self.id} - {self.nome} - {self.cnh}"
 

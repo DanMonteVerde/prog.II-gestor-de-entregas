@@ -21,7 +21,6 @@ def pegarinformacoes(arquivo):
             return json.load(f)
     return {}
 
-di = {"id": "2", "placa": "122231", "modelo": "modelo"}
 def salvarinformacoes(arquivo, dados):
 
     caminho_arquivo = os.path.join(BASE_DIR, f"{arquivo}.json")
