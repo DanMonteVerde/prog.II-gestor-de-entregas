@@ -4,6 +4,7 @@ import json
 from utils import pegarinformacoes, salvarinformacoes, pegarid
 from motoristas import Motorista
 from veiculo import Veiculo
+from entrega import Entrega
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def checararquivos():
@@ -43,7 +44,11 @@ def menu():
 
             Veiculo.cadastrar()
         elif opcao == "3":
-            print("Registrar entrega")
+            if Entrega.registrar_entrega() == True:
+                input("BLA BLA")
+            else:
+                input("Pressione enter para continuar...")
+                
         elif opcao == "4":
             print("Atualizar status da entrega")
         elif opcao == "5":

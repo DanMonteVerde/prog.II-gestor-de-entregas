@@ -24,11 +24,16 @@ def pegarinformacoes(arquivo):
 def salvarinformacoes(arquivo, dados):
 
     caminho_arquivo = os.path.join(BASE_DIR, f"{arquivo}.json")
-    
+    dados_existentes = {}
+    if os.path.exists(caminho_arquivo):
+        with open(caminho_arquivo, "r", encoding="utf-8") as f:
+            dados_existentes = json.load(f)
+    dados_existentes.update(dados)
     with open(caminho_arquivo, "w", encoding="utf-8") as f:
-        json.dump(dados, f, indent=4)
+        json.dump(dados_existentes, f, indent=4)
     # print(dados)
     return True
+
 #PARA TESTES
 if __name__ == "__main__":
-    print(salvarinformacoes("entrega",di))
+    pass

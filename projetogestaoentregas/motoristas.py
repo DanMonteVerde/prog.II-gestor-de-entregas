@@ -2,12 +2,14 @@ from utils import pegarinformacoes, salvarinformacoes, pegarid
 class Motorista():
     idcont = 1
     def __init__(self, nome:str, cnh:str):
-        self.id = Motorista.idcont 
-        Motorista.idcont +=1
+        Motorista.idcont = int(pegarid("veiculo")) + 1
+        self.id = Motorista.idcont
         self.nome = nome
         self.cnh = cnh
+        
     def todict(self):
         return {f"{str(self.id)}":{"nome": self.nome, "cnh": self.cnh}}
+    
     @staticmethod
     def toobj(dicionario):
         return Motorista(dicionario["nome"], dicionario["cnh"])

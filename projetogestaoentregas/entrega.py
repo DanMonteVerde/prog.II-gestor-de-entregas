@@ -1,24 +1,28 @@
 from utils import pegarid, pegarinformacoes, salvarinformacoes
 from motoristas import Motorista
 from veiculo import Veiculo
+
 class Entrega():
     idcont = 1
     def __init__(self, descricao, motorista, veiculo, status):
-        Entrega.idcont = int(pegarid("entrega"))
-        self.id = Entrega.idcont+1
-        Entrega.idcont += 1
+        Entrega.idcont = int(pegarid("entrega")) + 1
+        self.id = Entrega.idcont
         self.descricao = descricao
         self.__motorista = motorista
         self.__veiculo = veiculo
         self.__status = status
+        
     def __str__(self):
         return f"{self.id} - {self.descricao} - {self.__motorista} - {self.__veiculo} - {self.__status}"
+    
     @property
     def motorista(self):
         return self.__motorista
+    
     @property
     def veiculo(self):
         return self.__veiculo
+    
     @property
     def status(self):
         return self.__status
@@ -38,10 +42,12 @@ class Entrega():
             }
         }
         return dic
+    
     @staticmethod
     def registrar_entrega():
         descricao = input("Descricao: ")
         motoristas = pegarinformacoes("motorista")
+        
         if motoristas == {}:
             print("Nenhum motorista cadastrado!")
             input("Pressione enter para continuar...")
@@ -49,8 +55,10 @@ class Entrega():
             return False
         else:
             print("Motoristas cadastrados: ")
+            
             for i in range(len(motoristas)):
                 print(f"{i+1} - {motoristas[str(i+1)]['nome']} - {motoristas[str(i+1)]['cnh']}")
+                
             while True:
                 try:
                     motorista_escolhido = int(input("Escolha o motorista pelo numero dele: "))
@@ -69,6 +77,7 @@ class Entrega():
                             break
                     break
             veiculos = pegarinformacoes("veiculo")
+            
             if veiculos == {}:
                 print("Nenhum veículo cadastrado!")
                 input("Pressione enter para continuar...")
@@ -94,6 +103,7 @@ class Entrega():
                                 input(veiculo_escolhido)
                                 break
                         break
+                    
                 status = input("Status da entrega: ")
                 motorista = Motorista.toobj(motorista_escolhido)
                 veiculo = Veiculo.toobj(veiculo_escolhido)
@@ -101,10 +111,11 @@ class Entrega():
                 veiculo.id = id_veiculo_escolhido
                 entrega = Entrega(descricao, motorista, veiculo, status)
                 salvarinformacoes("entrega", entrega.para_dicionario())
-                #VER COMO VAI FUNCIONAR ESSA TRANSFERENCIA DE DADOS
+            #VER COMO VAI FUNCIONAR ESSA TRANSFERENCIA DE DADOS
             #JSON PRIMEIRO E DEPOIS CLASSE, OU AO CONTRARIO
                 print("====ENTREGA REGISTRADA COM SUCESSO====")
                 input("Pressione enter para continuar...")
+                return True
 if __name__ == "__main__":
     Entrega.registrar_entrega()
     

@@ -2,8 +2,10 @@ from utils import pegarid, salvarinformacoes, pegarinformacoes
 import re
 
 class Veiculo():
+    idcont = 1
     def __init__(self, placa, modelo):
-        self.id = None
+        Veiculo.idcont = int(pegarid("veiculo")) + 1
+        self.id = Veiculo.idcont
         self.placa = placa
         self.modelo = modelo
 
@@ -42,6 +44,8 @@ class Veiculo():
                 salvarinformacoes("veiculo", veiculos)
 
                 print("==== VEÍCULO CADASTRADO COM SUCESSO ====")
+                input("Pressione enter para continuar...")
+                
                 break
             else:
                 print("[ERRO] Placa inválida!")
