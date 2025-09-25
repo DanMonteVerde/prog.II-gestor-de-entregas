@@ -1,7 +1,58 @@
 from utils import pegarid, pegarinformacoes, salvarinformacoes
 from motoristas import Motorista
 from veiculo import Veiculo
+def listarentregas(filtro=None):
+    dados = pegarinformacoes("entrega")
+    if not dados:
+        return False
+    else:
+        if filtro == None:
+            for k,i in dados.items():
+                print(f"ID:{k}\nDescricao: {i['descricao']}\nStatus: {i['status']}")
+                print()
+                if i["motorista"]:
+                    for j,m in i["motorista"].items():
+                        print(f"ID Motorista: {j}\nNome: {m['nome']}\nCNH: {m['cnh']}")
+                        print()
+                if i["veiculo"]:
+                    for j,v in i["veiculo"].items():
+                        print(f"ID Veiculo: {j}\nPlaca: {v['placa']}\nModelo: {v['modelo']}")
+                        print()
+        else:
+            cont=0
+            for k,i in dados.items():
+                if i["status"].lower() == filtro.lower():
+                    cont+=1
+                    print(f"ID:{k}\nDescricao: {i['descricao']}\nStatus: {i['status']}")
+                    print()
+                    if i["motorista"]:
+                        for j,m in i["motorista"].items():
+                            print(f"ID Motorista: {j}\nNome: {m['nome']}\nCNH: {m['cnh']}")
+                            print()
+                    if i["veiculo"]:
+                        for j,v in i["veiculo"].items():
+                            print(f"ID Veiculo: {j}\nPlaca: {v['placa']}\nModelo: {v['modelo']}")
+                            print()
+            if cont == 0:
+                print("Sem entregas com esse filtro")
 
+def atualizar_status():
+    listarentregas()
+    input(pegarinformacoes("entrega").keys())
+    if pegarinformacoes("entrega") == {}:
+        print("Sem entregas cadastradas")
+        return False
+    id = input("Digite o ID da entrega: ")  
+    if id not in pegarinformacoes("entrega").keys():
+        print("ID nao encontrado")
+        return False
+    
+    status = input("Digite o novo status da entrega: ")
+    dados = pegarinformacoes("entrega")
+    dados[id]["status"] = status
+    
+    salvarinformacoes("entrega", dados)
+    print("Status da entrega atualizado com sucesso")
 class Entrega():
     idcont = 1
     def __init__(self, descricao, motorista, veiculo, status):

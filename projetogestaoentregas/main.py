@@ -4,7 +4,7 @@ import json
 from utils import pegarinformacoes, salvarinformacoes, pegarid
 from motoristas import Motorista
 from veiculo import Veiculo
-from entrega import Entrega
+from entrega import Entrega, listarentregas, atualizar_status
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def checararquivos():
@@ -14,6 +14,7 @@ def checararquivos():
         caminho = os.path.join(BASE_DIR, f"{nome}.json")
         if not os.path.exists(caminho):  # só cria se não existir
             salvarinformacoes(nome, {})
+            
 def saindo():
     for i in range(0, 3):
         print(".",end="", flush=True)
@@ -51,11 +52,16 @@ def menu():
                 
         elif opcao == "4":
             print("Atualizar status da entrega")
+            atualizar_status()
+            input("Pressione enter para continuar...")
         elif opcao == "5":
-            print("Listar entregas pendentes")
+            filtro = input("Digite o status que deseja filtrar: ")
+            listarentregas(filtro=filtro)
+            input("Pressione enter para continuar...")
         elif opcao == "6":
-            print("Listar todas as entregas")
-        
+            print("======Listar todas as entregas======")
+            listarentregas()
+            input("Pressione enter para continuar...")
         elif opcao == "0":
             print("Saindo do programa",end = "")
             saindo()

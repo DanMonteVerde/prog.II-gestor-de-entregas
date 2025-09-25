@@ -22,7 +22,6 @@ class Motorista():
     
 
     @staticmethod
-    
     def cadastrar():
         
         motoristas = pegarinformacoes("motorista")
