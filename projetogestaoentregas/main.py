@@ -2,8 +2,8 @@ import os
 import time
 import json
 from utils import pegarinformacoes, salvarinformacoes, pegarid
-from motoristas import Motorista
-from veiculo import Veiculo
+from motoristas import Motorista, listarmotoristas
+from veiculo import Veiculo, listarveiculo
 from entrega import Entrega, listarentregas, atualizar_status
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -37,6 +37,8 @@ def menu():
         print("4 - Atualizar status da entrega")
         print("5 - Listar entregas com filtro de status")
         print("6 - Listar todas as entregas")
+        print("7 - Listar motoristas")
+        print("8 - Listar veículos")
         print("0 - Sair")
         print("=" * 50)
 
@@ -74,6 +76,21 @@ def menu():
             print("-" * 50)
             input("Pressione ENTER para continuar...")
 
+        elif opcao == "7":
+            print("\n" + "-" * 50)
+            print("=== Listar motoristas ===")
+            print("-" * 50)
+            listarmotoristas()
+            print("-" * 50)
+            input("Pressione ENTER para continuar...")
+
+        elif opcao == "8":
+            print("\n" + "-" * 50)
+            print("=== Listar Veículos ===")
+            print("-" * 50)
+            listarveiculo()
+            print("-" * 50)
+            input("Pressione ENTER para continuar...")
         elif opcao == "0":
             print("Saindo do programa", end="")
             saindo()

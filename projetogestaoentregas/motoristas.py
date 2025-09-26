@@ -47,7 +47,16 @@ class Motorista():
                 print("[ERRO] CNH INVÁLIDA!")
                 print("-" * 50)
 
+def listarmotoristas():
+    motoristas = pegarinformacoes("motorista")
 
+    if not motoristas:
+        print("Nenhum motorista cadastrado!")
+        return False
+
+    else:
+        for i in range(len(motoristas)):
+            print(f"{i+1} - {motoristas[str(i+1)]['nome']} - {motoristas[str(i+1)]['cnh']}")
 if __name__ == "__main__":
     e = Motorista("", "")
     print("-" * 50)

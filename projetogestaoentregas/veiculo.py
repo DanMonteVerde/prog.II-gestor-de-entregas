@@ -57,3 +57,13 @@ class Veiculo():
                 print("-" * 50)
                 print("[ERRO] Placa inválida!")
                 print("-" * 50)
+def listarveiculo():
+    veiculos = pegarinformacoes("veiculo")
+
+    if not veiculos:
+        print("Nenhum veículo cadastrado!")
+        return False
+    
+    else:
+        for i in range(len(veiculos)):
+            print(f"{i+1} - {veiculos[str(i+1)]['placa']} - {veiculos[str(i+1)]['modelo']}")
