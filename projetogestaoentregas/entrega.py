@@ -152,7 +152,6 @@ class Entrega():
                         if motorista_escolhido == i+1:
                             motorista_escolhido = motoristas[str(i+1)]
                             id_motorista_escolhido = str(i+1)
-                            input(motorista_escolhido)
                             break
                     break
                 
@@ -184,7 +183,6 @@ class Entrega():
                             if veiculo_escolhido == i+1:
                                 veiculo_escolhido = veiculos[str(i+1)]
                                 id_veiculo_escolhido = str(i+1)
-                                input(veiculo_escolhido)
                                 break
                         break
                     
