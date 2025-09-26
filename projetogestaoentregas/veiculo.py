@@ -3,6 +3,7 @@ import re
 
 class Veiculo():
     idcont = 1
+
     def __init__(self, placa, modelo):
         Veiculo.idcont = int(pegarid("veiculo")) + 1
         self.id = Veiculo.idcont
@@ -13,11 +14,12 @@ class Veiculo():
         return f"{self.id} - {self.modelo} - Placa: {self.placa}"
     
     def todict(self):
-        return {f"{str(self.id)}":{"modelo": self.modelo, "placa": self.placa}}
+        return {f"{str(self.id)}": {"modelo": self.modelo, "placa": self.placa}}
     
     @staticmethod
     def toobj(dicionario):
         return Veiculo(dicionario["placa"], dicionario["modelo"])
+    
     @staticmethod
     def validando(placa):
         antigo = r"^[A-Z]{3}[0-9]{4}$"
@@ -26,13 +28,15 @@ class Veiculo():
     
     @staticmethod
     def cadastrar():
-        veiculos = pegarinformacoes("veiuculo")
-        modelo = input("Modelo so veículo: ")
+        veiculos = pegarinformacoes("veiculo")
+        modelo = input("Modelo do veículo: ")
 
         while True:
             placa = input("Placa do veículo: ").upper()
+
             if Veiculo.validando(placa):
                 veiculos = pegarinformacoes("veiculo")
+
                 if not veiculos:
                     veiculos = {}
 
@@ -43,10 +47,13 @@ class Veiculo():
                 veiculos[str(v.id)] = {"modelo": v.modelo, "placa": v.placa}
                 salvarinformacoes("veiculo", veiculos)
 
+                print("-" * 50)
                 print("==== VEÍCULO CADASTRADO COM SUCESSO ====")
-                input("Pressione enter para continuar...")
+                print("-" * 50)
+                input("Pressione ENTER para continuar...")
                 
                 break
             else:
+                print("-" * 50)
                 print("[ERRO] Placa inválida!")
-
+                print("-" * 50)

@@ -5,6 +5,7 @@ from utils import pegarinformacoes, salvarinformacoes, pegarid
 from motoristas import Motorista
 from veiculo import Veiculo
 from entrega import Entrega, listarentregas, atualizar_status
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def checararquivos():
@@ -17,57 +18,69 @@ def checararquivos():
             
 def saindo():
     for i in range(0, 3):
-        print(".",end="", flush=True)
+        print(".", end="", flush=True)
         time.sleep(0.4)
+    print()  # pula linha no final
+
 def menu():
     checararquivos()
     while True:
-        #limpar o terminal
-        os.system("cls")
-        print("""1. Cadastrar motorista
-2. Cadastrar veículo
-3. Registrar entrega
-4. Atualizar status da entrega
-5. Listar entregas pendentes
-6. Listar todas as entregas
-0. Sair""")
-        #pega a opção como string e tira os espaços
-        opcao = input().lstrip()
+        # limpar o terminal
+        os.system("cls" if os.name == "nt" else "clear")
+
+        print("=" * 50)
+        print("        SISTEMA DE GERENCIAMENTO DE ENTREGAS")
+        print("=" * 50)
+        print("1 - Cadastrar motorista")
+        print("2 - Cadastrar veículo")
+        print("3 - Registrar entrega")
+        print("4 - Atualizar status da entrega")
+        print("5 - Listar entregas com filtro de status")
+        print("6 - Listar todas as entregas")
+        print("0 - Sair")
+        print("=" * 50)
+
+        # pega a opção como string e tira os espaços
+        opcao = input("Escolha uma opção: ").strip()
 
         if opcao == "1":
             Motorista.cadastrar()
-        elif opcao == "2":
-            # if Veiculo.criar_veiculo() == False: 
-            #     print("Cadastro cancelado", end = "")
-            #     saindo()
-            # else:
-            #     input("Cadastro realizado com sucesso, pressione enter para continuar")
 
+        elif opcao == "2":
             Veiculo.cadastrar()
+
         elif opcao == "3":
-            if Entrega.registrar_entrega() == True:
-                input("BLA BLA")
-            else:
-                input("Pressione enter para continuar...")
-                
+            Entrega.registrar_entrega()
+
         elif opcao == "4":
-            print("Atualizar status da entrega")
+            print("\n" + "-" * 50)
+            print("=== Atualizar Status da Entrega ===")
+            print("-" * 50)
             atualizar_status()
-            input("Pressione enter para continuar...")
+            input("Pressione ENTER para continuar...")
+
         elif opcao == "5":
             filtro = input("Digite o status que deseja filtrar: ")
+            print("\n" + "-" * 50)
             listarentregas(filtro=filtro)
-            input("Pressione enter para continuar...")
+            print("-" * 50)
+            input("Pressione ENTER para continuar...")
+
         elif opcao == "6":
-            print("======Listar todas as entregas======")
+            print("\n" + "-" * 50)
+            print("=== Listar Todas as Entregas ===")
+            print("-" * 50)
             listarentregas()
-            input("Pressione enter para continuar...")
+            print("-" * 50)
+            input("Pressione ENTER para continuar...")
+
         elif opcao == "0":
-            print("Saindo do programa",end = "")
+            print("Saindo do programa", end="")
             saindo()
             break
+
         else:
-            input("Opção inválida. Pressione enter para continuar")
+            input("Opção inválida. Pressione ENTER para continuar...")
 
 
 if __name__ == "__main__":
