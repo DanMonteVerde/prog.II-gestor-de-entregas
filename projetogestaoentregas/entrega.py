@@ -6,6 +6,7 @@ def listarentregas(filtro=None):
     dados = pegarinformacoes("entrega")
 
     if not dados:
+        print("Não tem entregas cadastradas")
         return False
     
     else:
